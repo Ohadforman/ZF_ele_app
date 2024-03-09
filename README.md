@@ -6,7 +6,7 @@
 
 - [ ] create a instructions constant to the API from a outside file
 - [ ] create a API parametrs file to interact with the python script from outside
-- [ ] make the aprove logic striaght from the first page bottun 
+- [ ] make the approve logic striaght from the first page bottun 
 ### In Progress
 
 ## Frontend Tasks
