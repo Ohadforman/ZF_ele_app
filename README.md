@@ -4,7 +4,7 @@
 
 ### Todo
 
-- [ ] create a instructions constant to the API 
+- [ ] create a instructions constant to the API from a outside file
 - [ ] create a API parametrs file to interact with the python script from outside
 
 ### In Progress
