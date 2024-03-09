@@ -1,23 +1,25 @@
 from skidl import *
 
-# Define the components
-led = Part('device', 'LED', footprint='LED_SMD')
-buzzer = Part('device', 'Buzzer', footprint='BUZZER_SMD')
-fire_sensor = Part('device', 'FIRE_SENSOR', footprint='SENSOR_SMD')
+# Define components
+led = Part('device', 'LED')
+buzzer = Part('device', 'BUZZER')
 
-# Create the circuit
-led[1, 'A'] += Vcc
-buzzer[1] += led[2, 'K']
-fire_sensor[1, 'G'] += Net('GND')
+# Define circuit
+net_1, net_2 = Net(), Net()
 
-# Define the power and ground nets
-Vcc = Net('Vcc')
-GND = Net('GND')
-Vcc += Part('power', 'VCC')
-GND += Part('power', 'GND')
+led_n1, led_n2 = Net(), Net()
 
-# Print the circuit
+led[1, 2] += led_n1, net_1
+led[2, 1] += led_n2, net_2
+
+buzzer[1, 2] += net_2, Net()
+
+# Define a blinker using a capacitor
+c = Part('device', 'C', value='1uF')
+
+led_n2 += c[1], V
+
+gnd += c[2], Net(), buzzer[2]
+
+# Generate the netlist
 generate_netlist()
-
-
-###

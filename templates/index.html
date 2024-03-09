@@ -105,9 +105,37 @@
             text-align: left;
             border-radius: 10px;
         }
+        .instructions {
+            display: flex; /* Use flexbox */
+            flex-direction: column; /* Stack children vertically */
+            align-items: center; /* Center children horizontally */
+            justify-content: center; /* Center children vertically if there's enough space */
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center; /* Keep text centered */
+        }
+
+        .instructions ul {
+            list-style-position: inside;
+            text-align: left; /* Keep list items text-aligned to the left for readability */
+            max-width: 600px;
+            padding: 0; /* Reset default padding */
+        }
     </style>
 </head>
 <body>
+    <!-- Instructions Section -->
+    <div class="instructions">
+        <h2>How to Use the Gadget Generator Chat</h2>
+        <p>Welcome to the Gadget Generator Chat! Follow these steps to interact with the chatbot:</p>
+        <ul>
+            <li>Type in your gadget idea in the text area provided.</li>
+            <li>Click the "🚀 Generate" button or Enter in the keyboard to submit your idea to the bot or to improve it.</li>
+            <li>The bot will respond with feedback on your gadget idea.</li>
+            <li>You can then choose to "✅ Approve" the idea or "🔄 Reset Conversation" to start over.</li>
+        </ul>
+    </div>
+    <!-- Chat Container -->
     <div class="container">
         <h1>🤖 Gadget Generator Chat</h1>
         <form method="POST">
@@ -125,8 +153,8 @@
         <h2>Conversation:</h2>
         <ul class="conversation">
             {% for item in session.conversation %}
-                <li class="user-message">🤓Amazing and creative user: {{ item.user }} </li>
-                <li class="system-message">🤖GadBot: {{ item.system }} </li>
+                <li class="user-message">🤓Amazing and creative user: {{ item.user }}</li>
+                <li class="system-message">🤖GadBot: {{ item.system }}</li>
             {% endfor %}
         </ul>
     </div>
@@ -140,6 +168,26 @@
                 }
             });
         });
-    </script>
+        
+        function appendSystemMessageWithApproval(text) {
+            const conversationElement = document.getElementById('conversation');
+            const messageElement = document.createElement('li');
+            messageElement.className = 'system-message';
+            messageElement.innerHTML = `${text} <button onclick="approveMessage(this)">Approve</button>`;
+            conversationElement.appendChild(messageElement);
+        }
+        
+        function approveMessage(button) {
+            // Placeholder for your approval logic
+            button.disabled = true; // Optionally disable the button after approval
+            alert("Idea approved!"); // Simulate feedback
+        }
+        
+        // Example usage (you would replace this with your actual logic for receiving and displaying system messages)
+        setTimeout(() => {
+            appendSystemMessageWithApproval("Bot: That's a great idea! What do you think?");
+        }, 1000); // Simulate receiving a message from the bot after 1 second
+        </script>
+        
 </body>
 </html>
