@@ -13,8 +13,6 @@
 
 ### Todo
 
-- [ ] Task 7
-- [ ] Task 8
 
 ### In Progress
 
@@ -25,7 +23,6 @@
 ### Todo
 
 - [ ] Move approve bottun to the answer text
-- [ ] Task 14
 
 ### In Progress
 
