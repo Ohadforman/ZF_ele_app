@@ -1,0 +1,4 @@
+- 3x LEDs
+- 1x Sound Player
+- 1x Motion Sensor
+- 1x Time Sensor
