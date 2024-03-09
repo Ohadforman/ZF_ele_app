@@ -8,6 +8,7 @@
 - [ ] create a API parametrs file to interact with the python script from outside
 - [ ] make the approve logic striaght from the first page bottun
 - [ ] seperate python PCB generator from code. make it dynamic for chnages in packege
+- [ ] integrate KICAD to the PCB python code with a list of components
 ### In Progress
 
 ## Frontend Tasks
