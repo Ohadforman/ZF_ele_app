@@ -4,14 +4,10 @@
 
 ### Todo
 
-- [ ] Task 1
-- [ ] Task 2
+- [ ] create a instructions constant to the API 
+- [ ] create a API parametrs file to interact with the python script from outside
 
 ### In Progress
-
-- [ ] Task 3
-- [ ] Task 4
-
 
 ## Frontend Tasks
 
@@ -22,21 +18,17 @@
 
 ### In Progress
 
-- [ ] Task 9
-- [ ] Task 10
 
 
 ## Design Tasks
 
 ### Todo
 
-- [ ] Task 13
+- [ ] Move approve bottun to the answer text
 - [ ] Task 14
 
 ### In Progress
 
-- [ ] Task 15
-- [ ] Task 16
 
 # ZF app info
 
