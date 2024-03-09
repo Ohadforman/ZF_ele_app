@@ -3,110 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gadget Generator</title>
+    <title>🤖 Gadget Generator Chat</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --background-color: #121212;
+            --primary-color: #0af;
+            --secondary-color: #08f;
+            --text-color: #fff;
+            --accent-color: #ff4081;
+            --chat-background: #242424;
+            --input-background: #292929;
+            --message-user-bg: #007bff;
+            --message-system-bg: #666;
+        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Source Code Pro', monospace;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color: var(--background-color);
+            color: var(--text-color);
         }
         .container {
             max-width: 800px;
             margin: 50px auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: #1e1e1e;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--primary-color);
         }
         h1 {
             text-align: center;
-            color: #007bff;
-            margin-bottom: 20px;
-            font-size: 36px;
+            color: var(--primary-color);
         }
         form {
-            margin-bottom: 30px;
+            margin: 20px 0;
         }
         label {
             display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        input[type="submit"], .btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: var(--text-color);
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 5px;
+            display: block;
+            width: auto;
+            margin: 10px auto;
+            font-size: 1rem;
+        }
+        input[type="submit"]:hover, .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--primary-color);
         }
         textarea {
             width: 100%;
             padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
+            background-color: var(--input-background);
+            border: 1px solid var(--primary-color);
+            color: var(--text-color);
             border-radius: 5px;
-            resize: none;
-        }
-        input[type="submit"], .btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        input[type="submit"] {
-            background-color: #007bff;
-        }
-        input[type="submit"]:hover, .btn:hover {
-            background-color: #0056b3;
-        }
-        .btn-secondary {
-            background-color: #6c757d;
-        }
-        .btn-secondary:hover {
-            background-color: #545b62;
-        }
-        hr {
-            border: none;
-            border-top: 1px solid #ccc;
-            margin: 30px 0;
-        }
-        .conversation {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        .conversation li {
+            resize: vertical;
             margin-bottom: 10px;
         }
-        .user {
-            color: #333;
+        .conversation {
+            background-color: var(--chat-background);
+            padding: 10px;
+            border-radius: 5px;
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+            overflow-y: auto;
+            max-height: 400px;
         }
-        .system {
-            color: #007bff;
+        .conversation li {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: var(--message-system-bg);
+            position: relative;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .user, .user-message {
+            color: var(--text-color);
+            background-color: var(--message-user-bg);
+            align-self: flex-end;
+            text-align: right;
+            margin-left: auto;
+            border-radius: 10px;
+        }
+        .system, .system-message {
+            color: var(--text-color);
+            background-color: var(--message-system-bg);
+            text-align: left;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Gadget Generator</h1>
+        <h1>🤖 Gadget Generator Chat</h1>
         <form method="POST">
-            <label for="description">Enter Description:</label>
-            <textarea id="description" name="description" rows="4" required></textarea>
-            <input type="submit" name="submit" value="Generate Gadget" class="btn">
+            <label for="description">Hey there! 👋 What gadget functionality are you thinking about?</label>
+            <textarea id="description" name="description" rows="4" required placeholder="Enter your gadget's functionality description here..."></textarea>
+            <input type="submit" name="submit" value="🚀 Generate" class="btn">
         </form>
         <form method="POST" action="{{ url_for('approve') }}">
-            <input type="submit" name="approve" value="Approve" class="btn btn-secondary">
+            <input type="submit" name="approve" value="✅ Approve" class="btn">
         </form>
         <form method="POST" action="{{ url_for('reset') }}">
-            <input type="submit" name="reset" value="Reset Conversation" class="btn btn-secondary">
+            <input type="submit" name="reset" value="🔄 Reset Conversation" class="btn">
         </form>
         <hr>
-        <h2>Conversation History:</h2>
+        <h2>Conversation:</h2>
         <ul class="conversation">
             {% for item in session.conversation %}
-                <li class="user">User: {{ item.user }}</li>
-                <li class="system">System: {{ item.system }}</li>
+                <li class="user-message">🤓Amazing and creative user: {{ item.user }} </li>
+                <li class="system-message">🤖GadBot: {{ item.system }} </li>
             {% endfor %}
         </ul>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const descriptionTextarea = document.getElementById('description');
+            descriptionTextarea.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault(); // Prevent the default Enter behavior.
+                    document.querySelector('input[type="submit"][name="submit"]').click(); // Simulate clicking the Generate button.
+                }
+            });
+        });
+    </script>
 </body>
 </html>
